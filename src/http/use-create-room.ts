@@ -4,6 +4,7 @@ import type { CreateRoomResponse } from "./types/create-room-response";
 
 export function useCreateRoom() {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (data: CreateRoomRequest) => {
       const response = await fetch("http://localhost:3333/rooms", {
@@ -18,6 +19,7 @@ export function useCreateRoom() {
 
       return result;
     },
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-rooms"] });
     },
